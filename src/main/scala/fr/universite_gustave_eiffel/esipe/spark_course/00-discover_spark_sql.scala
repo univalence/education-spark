@@ -6,8 +6,8 @@ import org.apache.spark.sql.execution._
 import org.apache.spark.sql.functions._
 
 /**
- * In this file, you will find supervised exercises to discover Spark
- * SQL.
+ * In this file, you will find supervised exercises to discover '''Spark
+ * SQL'''.
  *
  * Spark SQL aims to provide a tool to process structured data typically
  * with a large volume, in a Spark cluster or locally. It is inspired by
@@ -122,7 +122,7 @@ object discover_spark_sql {
        *
        * A *dataframe* is a structure that acts like a collection, but
        * it does not necessary mount data in memory. A dataframe is
-       * essentially __lazy__. This is very welcome, especially if you
+       * essentially ''lazy''. This is very welcome, especially if you
        * have terabytes of data to process. Here, lazy means that you
        * will only do necessary processes according to the context.
        *
@@ -207,7 +207,8 @@ object discover_spark_sql {
        *
        * There are two possibilities:
        *
-       * * use the Scala API * describe the schema in a string
+       *   - use the Scala API
+       *   - describe the schema in a string
        *
        * We will the second option.
        *
@@ -282,7 +283,7 @@ object discover_spark_sql {
          * into another dataframe. Those operations are *lazy*: they do
          * not process anything unless you call a method like `count` or
          * `show`, for which you claim a result (those last operations
-         * are said to be __eager__).
+         * are said to be ''eager'').
          *
          * Notice the use of `$"locationType"` in the `select` method.
          * This is a reference to a column of our dataframe. This
@@ -523,10 +524,10 @@ object discover_spark_sql {
            * a method of type action, like `show`, `count`, or `write`.
            * They are eager operations, ie. for which a result is
            * immediately needed. The jobs are then cut into elementary
-           * *tasks*. All the tasks and their dependencies generate a
-           * *DAG* (for Direct Acyclic Graph). This graph helps Spark to
-           * manage, distribute, and schedule tasks among the nodes of
-           * the Spark cluster. If your data are divided into
+           * '''tasks'''. All the tasks and their dependencies generate
+           * a '''DAG''' (for Direct Acyclic Graph). This graph helps
+           * Spark to manage, distribute, and schedule tasks among the
+           * nodes of the Spark cluster. If your data are divided into
            * partitions, the DAG is rerun as is for each partition in
            * separated processes or separated threads.
            *

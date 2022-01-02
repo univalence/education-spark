@@ -17,14 +17,16 @@ package object internal {
 
       try f
       catch {
+        case PartException(l, cause) =>
+          throw PartException(s"$label > $l", cause)
         case e: Exception =>
-          throw new PartException(label, e)
+          throw PartException(label, e)
       } finally activatedContexts = activatedContexts.init
     } else ()
 
   def exercise(label: String)(f: => Unit): Unit = exercise(label, activated = true)(f)
 
-  class PartException(label: String, cause: Throwable)
+  case class PartException(label: String, cause: Throwable)
       extends RuntimeException(s"""Exception caught in part "$label"""", cause)
 
   def part(label: String): Unit = println(s"${Console.YELLOW}+++ PART $label${Console.RESET}")

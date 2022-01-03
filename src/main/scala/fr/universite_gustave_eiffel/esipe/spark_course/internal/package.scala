@@ -1,11 +1,15 @@
 package fr.universite_gustave_eiffel.esipe.spark_course
 
+import org.apache.spark.sql.Column
+
 import scala.util.{Failure, Success, Try}
 
 import java.io.File
 import java.time.LocalDateTime
 
 package object internal {
+
+  val ?? : Column = ???
 
   final private case class ActivateContext(label: String)
   private var activatedContexts: Seq[ActivateContext] = Seq.empty

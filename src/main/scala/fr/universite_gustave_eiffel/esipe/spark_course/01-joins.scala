@@ -80,7 +80,7 @@ object joins {
           .option("sep", "\t")
           // Option to correctly interpret timestamp in checkin data
           .option("timestampFormat", "EEE MMM d HH:mm:ss Z yyyy")
-          .schema("id STRING, venueId STRING, timestamp TIMESTAMP, tzOffset INT")
+          .schema("userId STRING, venueId STRING, timestamp TIMESTAMP, tzOffset INT")
           .csv(checkinsFilename)
           .as[Checkin]
           .cache()
@@ -261,4 +261,4 @@ object joins {
     }
 }
 
-case class Checkin(id: String, venueId: String, timestamp: Instant)
+case class Checkin(userId: String, venueId: String, timestamp: Instant)

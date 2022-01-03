@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 
 package object internal {
 
-  val ?? : Column = ???
+  def ?? : Column = ???
 
   final private case class ActivateContext(label: String)
   private var activatedContexts: Seq[ActivateContext] = Seq.empty

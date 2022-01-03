@@ -383,7 +383,12 @@ object discover_spark_sql {
            */
           val recordShopCount =
             result6_1
-              // We use a `where` clause to get just on row.
+              /**
+               * We use a `where` clause to get just on row. Notice the
+               * use of triple-equal (`===`) to add constraint and the
+               * use `lit` to convert a Scala value into a column
+               * expression.
+               */
               .where($"locationType" === lit("Record Shop"))
               .head()
               // Then, we extract the count column from the row.

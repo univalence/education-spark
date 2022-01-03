@@ -262,7 +262,7 @@ object discover_spark_sql {
          * file.
          *
          * TODO EXERCISE 4: activate the block below and run the program
-         * Note: to activate, change `shouldActivate` to `true`.
+         * Note: to activate, change `activated` to `true`.
          */
         exercise("Count", activated = false) {
           val result4 = time("Count data")(dataframe.count())

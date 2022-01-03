@@ -134,6 +134,7 @@ object discover_spark_sql {
       val dataframe =
         spark.read
           .option("sep", "\t")
+//          .option("inferSchema", true)
           .schema("id STRING, latitude DOUBLE, longitude DOUBLE, locationType STRING, country STRING")
           .csv(filename)
           /**

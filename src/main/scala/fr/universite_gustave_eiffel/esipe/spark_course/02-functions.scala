@@ -194,9 +194,11 @@ object functions {
           val result =
             data
               .withColumn("day", ??)
+              .orderBy(??)
               .groupBy(??)
-              .agg(??.as("checkins"))
-              .select(??)
+              .agg(??)
+
+          result.printSchema()
 
           time("List of all first checker of the day for each location") {
             result.show(truncate = false)

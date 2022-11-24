@@ -1,4 +1,4 @@
-package fr.universite_gustave_eiffel.esipe.spark_course
+package io.univalence.education_spark
 
 import org.apache.spark.sql.Column
 

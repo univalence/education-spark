@@ -1,6 +1,6 @@
-package fr.universite_gustave_eiffel.esipe.spark_course
+package io.univalence.education_spark
 
-import fr.universite_gustave_eiffel.esipe.spark_course.internal._
+import internal._
 import org.apache.spark.sql._
 import org.apache.spark.sql.execution._
 import org.apache.spark.sql.expressions._
@@ -40,7 +40,7 @@ object functions {
           .master("local[*]")
           // The timestamp format in data implies to use this config.
           .config("spark.sql.legacy.timeParserPolicy", "LEGACY")
-          .config("spark.eventLog.enabled", true)
+          .config("spark.eventLog.enabled", value = true)
           .getOrCreate()
 
       import spark.implicits._

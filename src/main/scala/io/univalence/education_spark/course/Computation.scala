@@ -1,4 +1,4 @@
-package fr.universite_gustave_eiffel.esipe.spark_course.course
+package io.univalence.education_spark.course
 
 // GADT (Generalized ADT)
 // traitement sur des collections

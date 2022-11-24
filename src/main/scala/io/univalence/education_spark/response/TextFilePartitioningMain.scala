@@ -1,4 +1,4 @@
-package fr.universite_gustave_eiffel.esipe.spark_course.response
+package io.univalence.education_spark.response
 
 import java.io.File
 
@@ -24,7 +24,7 @@ object TextFilePartitioningMain {
     val partitionSize = size / partitionCount
 
     val firstPartitions: List[FilePartition] =
-      (0.until(partitionCount - 1))
+      (0 until (partitionCount - 1))
         .map { partitionId =>
           FilePartition(
             id          = partitionId,

@@ -1,6 +1,6 @@
-package fr.universite_gustave_eiffel.esipe.spark_course
+package io.univalence.education_spark
 
-import fr.universite_gustave_eiffel.esipe.spark_course.internal._
+import internal._
 import org.apache.spark.sql._
 import org.apache.spark.sql.execution._
 import org.apache.spark.sql.functions._

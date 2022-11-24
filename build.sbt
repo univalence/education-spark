@@ -1,4 +1,4 @@
-name := "spark_course"
+name := "education-spark"
 
 scalaVersion := "2.13.10"
 

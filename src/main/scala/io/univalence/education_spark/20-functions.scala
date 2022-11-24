@@ -115,11 +115,8 @@ object functions {
            * will use `show`.
            */
           val local_to_date: UserDefinedFunction = udf[Date, Timestamp](localToDate).withName("local_to_date")
-//          spark.udf.register("local_to_date", local_to_date)
-//          data.createOrReplaceTempView("DATA")
 
           val result = data.withColumn("day", local_to_date($"timestamp"))
-//            spark.sql("SELECT *, local_to_date(timestamp) as day FROM data")
 
           time("Apply a function") {
             result.show()

@@ -11,29 +11,29 @@ import java.time.Instant
  * Join leads to problem that generally can be solved in O(N**2) time,
  * and this is bad.
  *
- * When joining data, you have to consider two sets of data, and try
+ * When joining data, you have to consider two sets of data, and try to
  * find for each data in the first set, the one that matches in the
- * second set. A naive algorithm would:
+ * second set. A naive algorithm would be:
  *
  *   1. Take a line in the first dataset.
  *   1. Loop other the lines of the second dataset until we find the
  *      matching one (or not).
  *   1. Repeat with the next line in the first dataset.
  *
- * This is the '''cartesian product'''. But, this is extremely
- * inefficient. And it only works for inner join. For the other kind of
- * joins, you need to apply this algorithm on both datasets separately.
- * So, you get an algorithm complexity of O(2xN^2^), which is closed to
- * O(N^2^).
+ * This is a join algrithm that uses the '''cartesian product'''. But,
+ * this is extremely inefficient. And it only works for inner join. For
+ * the other kind of joins, you need to apply this algorithm on both
+ * datasets separately. So, you get an algorithm complexity of
+ * O(2xN^2^), which is closed to O(N^2^).
  *
  * Under Spark SQL, we used to process structured data, on which you may
  * determine a key. A key is supposed to be unique in a dataset. In this
- * case, you can data store data in a hash table (access complexity
- * closes to O(N)), and then reduce the overall complexity to something
- * also more or less closed to O(N). If your data are sorted according
- * to the key, you are even closer to O(N) with just one pass. Then, if
- * you add a sort step, you may have better performances in comparison
- * to the previous approach.
+ * case, you can store data in a hash table (access complexity closes to
+ * O(N)), and then reduce the overall complexity to something also more
+ * or less closed to O(N). If your data are sorted according to the key,
+ * you are even closer to O(N) with just one pass. Then, if you add a
+ * sort step, you may have better performances in comparison to the
+ * previous approach.
  *
  * But do not forget that you have to deal with low resource machines,
  * in comparison to the volume of the data you have to process. So,
@@ -167,10 +167,11 @@ object joins {
          * ==Broadcast Hash Join==
          *
          * This strategy is selected if one of your dataset is small
-         * enough to fit in memory. It will be broadcast to all executor
-         * of your application, as a hash table. ''Broadcast'' here
-         * means that a copy of data is sent to all of the executors,
-         * resulting in network transmission although.
+         * enough to fit in memory. In this case, the dataset will be
+         * broadcasted to all the executors of your application, as a
+         * hash table. ''Broadcast'' here means that a copy of data is
+         * sent to all of the executors, resulting in network
+         * transmission although.
          *
          * The threshold that determines if a dataset is small is given
          * by this parameter.
@@ -247,7 +248,8 @@ object joins {
 
         /**
          * TODO EXERCISE 2: determine from both the dataset, the
-         * top-five of the most popular location type?
+         * top-five of the most popular location types? (and not the
+         * top-five of the most popular location)
          */
         exercise("Top-five location type", activated = false) {
           val data: DataFrame = ??? // join
@@ -260,5 +262,3 @@ object joins {
       }
     }
 }
-
-case class Checkin(userId: String, venueId: String, timestamp: Instant)

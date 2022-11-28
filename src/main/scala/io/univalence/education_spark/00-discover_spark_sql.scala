@@ -130,10 +130,7 @@ object discover_spark_sql__read_a_csv_file {
        */
       val dataframe =
         spark.read
-          .option("sep", "\t")
-          .schema("id STRING, latitude DOUBLE, longitude DOUBLE, locationType STRING, country STRING")
           .csv(filename)
-          .as[Venue]
 
       /**
        * This line below asks Spark to keep the content of the file in

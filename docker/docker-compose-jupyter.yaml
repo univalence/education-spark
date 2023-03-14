@@ -1,0 +1,8 @@
+services:
+  almond:
+    image: almondsh/almond:0.13.2-scala-2.12.17
+    ports:
+      - "18888:8888"
+      - "4040:4040"
+    volumes:
+      - "../lab:/home/jovyan/work"

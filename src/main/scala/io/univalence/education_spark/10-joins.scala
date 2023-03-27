@@ -5,6 +5,7 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.execution._
 import org.apache.spark.sql.functions._
 
+import java.nio.file.{Files, Paths}
 import java.time.Instant
 
 /**
@@ -49,6 +50,9 @@ object joins {
 
   def main(args: Array[String]): Unit =
     time("Joins") {
+      val historyPath = Paths.get("target/history")
+      Files.createDirectories(historyPath)
+
       // Let's create a Spark session
       val spark =
         SparkSession
@@ -58,6 +62,7 @@ object joins {
           // The timestamp format in data implies to use this config.
           .config("spark.sql.legacy.timeParserPolicy", "LEGACY")
           .config("spark.eventLog.enabled", value = true)
+          .config("spark.eventLog.dir", value = historyPath.toString)
           .getOrCreate()
 
       import spark.implicits._

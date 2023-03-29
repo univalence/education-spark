@@ -74,10 +74,16 @@ implicit class RichDS[A](val ds: Dataset[A]) {
       row.toSeq.map { cell =>
         val str = cell match {
           case null => "null"
-          case binary: Array[Byte] => binary.map("%02X".format(_)).mkString("[", " ", "]")
-          case array: Array[_] => array.mkString("[", ", ", "]")
-          case seq: Seq[_] => seq.mkString("[", ", ", "]")
-          case _ => cell.toString
+          case binary: Array[Byte] =>
+            binary.map("%02X".format(_)).mkString("[", " ", "]")
+          case array: Array[_] =>
+            array.mkString("[", ", ", "]")
+          case seq: Seq[_] =>
+            seq.mkString("[", ", ", "]")
+          case seq: scala.collection.mutable.ArraySeq[_] =>
+            seq.mkString("[", ", ", "]")
+          case _ =>
+            cell.toString
         }
         if (truncate > 0 && str.length > truncate) {
           // do not show ellipses for strings shorter than 4 characters.

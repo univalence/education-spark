@@ -1,4 +1,4 @@
-package io.univalence.education_spark.course
+package io.univalence.education_spark.internal.course
 
 import scala.annotation.tailrec
 

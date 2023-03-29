@@ -1,4 +1,4 @@
-package io.univalence.education_spark.course
+package io.univalence.education_spark.internal.course
 
 // GADT (Generalized ADT)
 // traitement sur des collections

@@ -1,12 +1,10 @@
-package io.univalence.education_spark
+package io.univalence.education_spark._20_spark_sql
 
-import internal._
+import io.univalence.education_spark.internal.{exercise, time}
+import io.univalence.education_spark.{Checkin, Venue}
 import org.apache.spark.sql._
-import org.apache.spark.sql.execution._
-import org.apache.spark.sql.functions._
 
 import java.nio.file.{Files, Paths}
-import java.time.Instant
 
 /**
  * Join leads to problem that generally can be solved in O(N**2) time,

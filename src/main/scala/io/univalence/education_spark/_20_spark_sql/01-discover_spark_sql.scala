@@ -1,12 +1,13 @@
-package io.univalence.education_spark
+package io.univalence.education_spark._20_spark_sql
 
-import internal._
+import io.univalence.education_spark.Venue
+import io.univalence.education_spark.internal.{check, clean, exercise, time}
 import org.apache.spark.sql._
 import org.apache.spark.sql.execution._
 import org.apache.spark.sql.functions._
 
 /** Now, we will start manipulate CSV data with Spark SQL. */
-object discover_spark_sql {
+object _01_discover_spark_sql {
 
   def main(args: Array[String]): Unit =
     time("Discover Spark SQL") {

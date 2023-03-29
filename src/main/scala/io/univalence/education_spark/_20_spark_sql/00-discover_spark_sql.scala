@@ -1,9 +1,8 @@
-package io.univalence.education_spark
+package io.univalence.education_spark._20_spark_sql
 
-import internal._
+import io.univalence.education_spark.Venue
+import io.univalence.education_spark.internal.{exercise, time}
 import org.apache.spark.sql._
-import org.apache.spark.sql.execution._
-import org.apache.spark.sql.functions._
 
 /**
  * In this file, you will find supervised exercises to discover '''Spark
@@ -30,7 +29,7 @@ import org.apache.spark.sql.functions._
  * @see
  *   https://spark.apache.org/docs/3.3.1/sql-programming-guide.html
  */
-object discover_spark_sql__read_a_csv_file {
+object _00_discover_spark_sql__read_a_csv_file {
 
   def main(args: Array[String]): Unit =
     time("Discover Spark SQL - Read a CSV file") {
@@ -81,7 +80,6 @@ object discover_spark_sql__read_a_csv_file {
        * declarations from this session, that will make our daily life
        * easier as a data engineer.
        */
-      import spark.implicits._
 
       /**
        * Here comes the interesting part!

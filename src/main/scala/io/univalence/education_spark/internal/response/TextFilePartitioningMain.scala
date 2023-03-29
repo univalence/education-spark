@@ -1,4 +1,4 @@
-package io.univalence.education_spark.response
+package io.univalence.education_spark.internal.response
 
 import java.io.File
 

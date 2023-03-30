@@ -1,8 +1,8 @@
 services:
   almond:
-    image: almondsh/almond:0.13.4-scala-2.13.10
+    image: polynote/polynote:0.5.1-2.12-spark3.1
     ports:
-      - "18888:8888"
+      - "8192:8192"
       - "4040-4050:4040-4050"
     volumes:
       - "../lab:/home/jovyan/work"

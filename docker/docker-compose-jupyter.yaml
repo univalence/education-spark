@@ -2,7 +2,7 @@ services:
   almond:
     image: almondsh/almond:0.13.4-scala-2.13.10
     ports:
-      - "18888:8888"
+      - "8888:8888"
       - "4040-4050:4040-4050"
     volumes:
       - "../lab:/home/jovyan/work"

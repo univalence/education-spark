@@ -11,10 +11,11 @@ RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 
 ENV SPARK_VERSION=3.3.2 \
 HADOOP_VERSION=3 \
 SPARK_HOME=/opt/spark \
-PYTHONHASHSEED=1
+PYTHONHASHSEED=1 \
+SCALA_VERSION="-scala2.13"
 
 # Download and uncompress spark from the apache archive
-RUN wget --no-verbose -O apache-spark.tgz "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" \
+RUN wget --no-verbose -O apache-spark.tgz "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}${SCALA_VERSION}.tgz" \
 && mkdir -p /opt/spark \
 && tar -xf apache-spark.tgz -C /opt/spark --strip-components=1 \
 && rm apache-spark.tgz

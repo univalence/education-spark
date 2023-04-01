@@ -2,4 +2,5 @@ target/
 .idea/
 .bsp/
 data/output
-.ipynb_checkpoints
+.ipynb_checkpoints/
+spark-warehouse/

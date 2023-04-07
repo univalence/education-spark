@@ -1,7 +1,7 @@
 package io.univalence.education_spark._30_spark_streaming
 
 import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, NewTopic}
-import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord, RecordMetadata}
 import org.apache.kafka.common.serialization.Serdes
 
 import scala.annotation.tailrec
@@ -26,7 +26,7 @@ object ProducerMain {
         val fields = line.split(",")
         val record = new ProducerRecord[String, String](Configuration.inputTopic, fields(0), line)
 
-        val metadata = producer.send(record).get()
+        val metadata: RecordMetadata = producer.send(record).get()
 
         println(s"$metadata -> $line")
         val time = Random.nextInt(500) + 200

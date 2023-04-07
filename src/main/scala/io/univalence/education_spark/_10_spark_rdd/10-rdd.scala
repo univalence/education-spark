@@ -5,6 +5,8 @@ import org.apache.spark.rdd.RDD
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import scala.io.Source
+import scala.util.Using
 
 /**
  * Here is the first example of application that uses Spark (more
@@ -51,6 +53,7 @@ object _10_spark_rdd {
      * `local[2]` to limit Spark to 2 CPU cores.
      */
     conf.setMaster("local[*]")
+//    conf.setMaster("spark://localhost:7077")
 
     val historyPath = "target/history"
     conf.set("spark.eventLog.enabled", "true")
@@ -65,7 +68,16 @@ object _10_spark_rdd {
     val spark = SparkContext.getOrCreate(conf)
 
     // load the file
-    val fileRdd: RDD[String] = spark.textFile(filename, minPartitions = 4)
+    // val fileRdd: RDD[String] = spark.textFile(filename, minPartitions = 4)
+    val lines =
+      Using(Source.fromFile(filename)) { file =>
+        file.getLines().toList
+      }.get
+    val fileRdd: RDD[String] = spark.parallelize(lines, numSlices = 4)
+
+    fileRdd.foreachPartition(partition => partition.foreach(line => println(line)))
+    fileRdd.repartition(4)
+    fileRdd.coalesce(4)
 
     // get the header
     val header = fileRdd.first()

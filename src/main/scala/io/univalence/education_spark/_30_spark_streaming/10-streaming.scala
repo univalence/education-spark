@@ -43,7 +43,8 @@ object _10_streaming {
         ConsumerStrategies.Subscribe(List(Configuration.inputTopic), kafkaParams)
       )
 
-    val updateFunc: (Seq[Int], Option[Int]) => Option[Int] = (prices, sum) => sum.map(sumValue => sumValue + prices.sum)
+    val updateFunc: (Seq[Int], Option[Int]) => Option[Int] =
+      (ones, sum) => sum.map(sumValue => sumValue + ones.sum)
 
     val resultStream: DStream[(String, Int)] =
       stream
@@ -70,6 +71,9 @@ object _10_streaming {
         }.get
       }
     }
+
+    ssc.start()
+    ssc.awaitTermination()
   }
 
   def convertLine(line: String): Order = {

@@ -13,7 +13,6 @@ object _20_structured_streaming {
         .builder()
         .appName("StructuredStreamingApp")
         .master("local[*]")
-        .config("spark.sql.streaming.checkpointLocation", "data/output/checkpoint")
         .getOrCreate()
 
     import spark.implicits._
@@ -25,7 +24,7 @@ object _20_structured_streaming {
         .option("subscribe", Configuration.inputTopic)
         .load()
 
-    val orderSchema =
+    val orderSchema: StructType =
       StructType(
         Seq(
           StructField("id", StringType),
@@ -36,17 +35,27 @@ object _20_structured_streaming {
         )
       )
 
-    val df =
+    val df: DataFrame =
       rawDf
-        .select($"key".cast("STRING").as("key"), $"value".cast("STRING").as("value"))
-        .select($"key", from_csv($"value", orderSchema, Map.empty[String, String]).as("value"))
+        .select(
+          $"key".cast("STRING").as("key"),
+          $"value".cast("STRING").as("value")
+        )
+        .select(
+          $"key",
+          from_csv(
+            $"value",
+            orderSchema,
+            Map.empty[String, String]
+          ).as("value")
+        )
 
     df.printSchema()
 
-    val resultDf =
+    val resultDf: DataFrame =
       df
         .groupBy($"value.product".as("key"))
-        .agg(count(lit(1)).as("count"))
+        .count()
         .select($"key", $"count".cast("STRING").as("value"))
 
     val ds: StreamingQuery =
@@ -55,6 +64,7 @@ object _20_structured_streaming {
         .format("kafka")
         .option("kafka.bootstrap.servers", Configuration.bootstrapServers)
         .option("topic", Configuration.outputTopic)
+        .option("checkpointLocation", "data/output/checkpoint")
         .start()
 
     ds.awaitTermination()
